@@ -44,10 +44,6 @@ Building this project helped me practice:
 - [ ] Notes/To-do list feature
 - [ ] Browser extension version
 
-## 📸 Screenshots
-
-*Add screenshots here after uploading to GitHub*
-
 ## 👨‍💻 Author
 
 **Chandu Jannu**
