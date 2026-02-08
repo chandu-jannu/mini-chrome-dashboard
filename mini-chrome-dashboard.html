@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard StartPage</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Time and Date Section */
+    .time-section {
+      margin-top: 40px;
+    }
+
+    .time {
+      font-size: 72px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .date {
+      font-size: 18px;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+
+    .weather {
+      margin-top: 15px;
+      font-size: 20px;
+      opacity: 0.7;
+    }
+
+    /* Search Box */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .search-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .search-box input {
+      padding: 14px 16px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      outline: none;
+      color: #333;
+    }
+
+    .search-box input::placeholder {
+      color: #999;
+    }
+
+    .search-box select {
+      padding: 14px 12px;
+      border: none;
+      font-size: 15px;
+      outline: none;
+      background: #f0f0f0;
+      cursor: pointer;
+      color: #333;
+      border-left: 1px solid #ddd;
+    }
+
+    /* Apps Grid */
+    .apps {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 35px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .app {
+      width: 110px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .app:hover {
+      transform: scale(1.1);
+    }
+
+    .app img {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .app-name {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      text-align: center;
+      opacity: 0.5;
+      font-size: 13px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .time {
+        font-size: 48px;
+      }
+
+      .search-box {
+        width: 90%;
+      }
+
+      .apps {
+        gap: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Time and Date Display -->
+  <div class="time-section">
+    <div class="time" id="time">00:00</div>
+    <div class="date" id="date">Loading...</div>
+    <div class="weather">Weather: 25°C ☀️</div>
+  </div>
+
+  <!-- Search Box -->
+  <div class="search-container">
+    <div class="search-box">
+      <input 
+        id="query" 
+        type="text"
+        placeholder="Chandu, what can I help you..." 
+        onkeydown="handleSearch(event)"
+      >
+      <select id="engine">
+        <option value='https://www.google.com/search?q='>Google</option>
+        <option value='https://www.youtube.com/results?search_query='>YouTube</option>
+        <option value='https://open.spotify.com/search/'>Spotify</option>
+       
+      </select>
+    </div>
+  </div>
+
+  <!-- Apps Section -->
+  <div class="apps">
+
+    <div class="app" onclick="openApp('https://mail.google.com/mail/u/0/#inbox')">
+      <img src='https://s.yimg.com/zb/imgv1/86879a38-1d4c-302d-b3fb-b5bd2d52bf82/t_500x300' alt="Gmail">
+      <div class="app-name">Gmail</div>
+    </div>
+
+    <div class="app" onclick="openApp('https://chat.openai.com')">
+      <img src='https://tse3.mm.bing.net/th/id/OIP.idxNgXo-pNlNtSdni0QVRQHaH7?pid=Api&P=0&h=180' alt="ChatGPT">
+      <div class="app-name">ChatGPT</div>
+    </div>
+
+    <div class="app" onclick="openApp('https://web.whatsapp.com')">
+      <img src='https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg' alt="WhatsApp">
+      <div class="app-name">WhatsApp</div>
+    </div>
+
+    <div class="app" onclick="openApp('https://github.com/chandu-jannu')">
+      <img src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png' alt="GitHub">
+      <div class="app-name">GitHub</div>
+    </div>
+
+    <div class="app" onclick="openApp('https://www.google.com/maps')">
+      <img src='https://upload.wikimedia.org/wikipedia/commons/b/bd/Google_Maps_Logo_2020.svg' alt="Maps">
+      <div class="app-name">Maps</div>
+    </div>
+
+    <div class="app" onclick="openApp('https://www.youtube.com')">
+      <img src='https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg' alt="YouTube">
+      <div class="app-name">YouTube</div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Chandu Jannu | Built with HTML, CSS & JavaScript</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Update time every second
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('time').innerText = `${hours}:${minutes}`;
+    }
+
+    // Update date
+    function updateDate() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const dateString = now.toLocaleDateString('en-US', options);
+      document.getElementById('date').innerText = dateString;
+    }
+
+    // Handle search on Enter key
+    function handleSearch(event) {
+      if (event.key === 'Enter') {
+        const engine = document.getElementById('engine').value;
+        const query = document.getElementById('query').value.trim();
+        if (query) {
+          window.open(engine + encodeURIComponent(query), '_blank');
+        }
+      }
+    }
+
+    // Open app in new tab
+    function openApp(url) {
+      window.open(url, '_blank');
+    }
+
+    // Initialize
+    updateTime();
+    updateDate();
+    setInterval(updateTime, 1000);
+  </script>
+
+</body>
+</html>
