@@ -48,7 +48,7 @@ Building this project helped me practice:
 
 **Chandu Jannu**
 - GitHub: [@chandu-jannu](https://github.com/chandu-jannu)
-- Learning: HTML, CSS, JavaScript
+- Tech Stack: HTML, CSS, JavaScript(Basics)
 
 ## 📝 License
 
